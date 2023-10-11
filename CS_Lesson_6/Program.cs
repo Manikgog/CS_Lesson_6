@@ -23,7 +23,7 @@ namespace CS_Lesson_6
             //accounting.IncomeTaxCalculation(managerSalary);
             //accounting.IncomeTaxCalculation(headDepartment);
 
-            SimpleN_gon triangle = new CompositeFigure();
+            CompositeFigure triangle = new CompositeFigure();
 
             triangle.AngleBetween = 60;
             triangle.NumberOfSides = 3;

@@ -16,7 +16,9 @@ namespace CS_Lesson_6
                 if (Hight < 0) 
                 { 
                     Console.WriteLine("Число меньше нуля"); 
+                    Hight = 0;
                 } 
+                Hight = value;
             }
         }
         public float BaseLength 
@@ -27,7 +29,9 @@ namespace CS_Lesson_6
                 if (BaseLength < 0)
                 {
                     Console.WriteLine("Число меньше нуля");
+                    BaseLength= 0;
                 }
+                BaseLength = value;
             }
         }
         public float AngleBetween 
@@ -35,10 +39,12 @@ namespace CS_Lesson_6
             get => AngleBetween;
             set
             {
-                if (AngleBetween < 0 || AngleBetween >= 180)
+                if (AngleBetween <= 0 || AngleBetween >= 180)
                 {
                     Console.WriteLine("Число меньше нуля");
+                    AngleBetween = 1;
                 }
+                AngleBetween = value;
             }
         }
         public int NumberOfSides
@@ -49,7 +55,9 @@ namespace CS_Lesson_6
                 if (NumberOfSides < 3)
                 {
                     Console.WriteLine("Число меньше нуля");
+                    NumberOfSides = 0;
                 }
+                NumberOfSides= value;
             }
         }
         public float SideLength 
@@ -60,14 +68,16 @@ namespace CS_Lesson_6
                 if (SideLength < 0)
                 {
                     Console.WriteLine("Число меньше нуля");
+                    SideLength = 0;
                 }
+                SideLength= value;
             }
         }
         public float Square 
         {
             get 
             {
-                Square = (float)(((NumberOfSides * SideLength * SideLength) / 4) + (1 / Math.Tan(180 / NumberOfSides)));
+                Square = (float)(((NumberOfSides * SideLength * SideLength) / 4) + (1 / Math.Abs(Math.Tan(180 / NumberOfSides))));
                 return Square;
             }
             set { }
