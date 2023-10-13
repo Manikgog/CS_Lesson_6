@@ -23,14 +23,50 @@ namespace CS_Lesson_6
             //accounting.IncomeTaxCalculation(managerSalary);
             //accounting.IncomeTaxCalculation(headDepartment);
 
-            CompositeFigure triangle = new CompositeFigure();
+            Task_2();
+            
+            
+        }
 
-            triangle.AngleBetween = 60;
-            triangle.NumberOfSides = 3;
-            triangle.SideLength = 10;
-            triangle.Hight = 5;
-            triangle.BaseLength = 10;
-            Console.WriteLine(triangle.Square);
+        public static void Task_2()
+        {
+            /*Реализовать интерфейс ПростойНУгольник, который
+        имеет свойства: Высота, Основание, УголМеждуОснованиемИСмежнойСтороной, 
+        КоличествоСторон, ДлиныСторон, Площадь, Периметр.
+        Реализовать класс СоставнаяФигура который может
+        состоять из любого количества ПростыхНУгольников.
+        Для данного класса определить метод нахождения площади фигуры.
+        Предусмотреть варианты невозможности задания
+        фигуры (введены отрицательные длины сторон или при
+        создании объекта треугольника существует пара сторон,
+        сумма длин которых меньше длины третьей стороны и т.п.)
+             */
+
+            /*
+             Решение задачи. Для вычисления площади простого н-угольника явно недостаточно
+        входных данных: мало одного угла между основанием и смежной стороной. Нужны все углы 
+        либо координаты точек вершин. Есть и избыточные данные, 
+        такие как Основание и высота. Поэтому задачу решил для правильного простого многоугольинка
+        с использованием следующих свойств: 
+        ДлиныСторон, КоличествоСторон, КоличествоПростыхНУгольников.
+            */
+            Console.Write("Введите количество сторон правильного простого многоугольника: ");
+
+            int numberOfSides = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Введите длину стороны (см): ");
+
+            float sideLength = (float)Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Введите количество многоугольников: ");
+
+            int numberOfSimpleN_gon = Convert.ToInt32(Console.ReadLine());
+
+            ISimpleN_gon triangle = new CompositeFigure(numberOfSides, sideLength, numberOfSimpleN_gon);
+
+            Console.WriteLine("Площадь " + numberOfSimpleN_gon + " " + numberOfSides + "-угольников равна ->"  + " " + triangle.Square() + " кв.см");
+            Console.WriteLine("Периметр " + numberOfSimpleN_gon + " " + numberOfSides + "-угольников равен ->"  + " " + triangle.Perimetr() + " см");
+
 
         }
     }

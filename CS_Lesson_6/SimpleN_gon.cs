@@ -6,19 +6,12 @@ using System.Threading.Tasks;
 
 namespace CS_Lesson_6
 {
-    internal interface SimpleN_gon
+    internal interface ISimpleN_gon
     {
-        float Hight { get; set; }
-        float BaseLength { get; set; }
-        float AngleBetween { get; set; }
-        int NumberOfSides { get; set; }
-        float SideLength { get; set; }
+        int NumberOfSides { get; }
+        float SideLength { get;  }
 
-        float Square { get; set; }
-
-        float Perimetr { get; set; }
-
-        
-     
+        float Square();
+        float Perimetr();     
     }
 }

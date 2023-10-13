@@ -6,93 +6,80 @@ using System.Threading.Tasks;
 
 namespace CS_Lesson_6
 {
-    internal class CompositeFigure : SimpleN_gon
+    internal class CompositeFigure : ISimpleN_gon
     {
-        public float Hight 
+               
+        private float ConvertToRadians(float angle)
         {
-            get => Hight; 
-            set 
-            { 
-                if (Hight < 0) 
-                { 
-                    Console.WriteLine("Число меньше нуля"); 
-                    Hight = 0;
-                } 
-                Hight = value;
-            }
+            return (float)(Math.PI / 180) * angle;
         }
-        public float BaseLength 
+
+        public CompositeFigure(int numberOfSides, float sideLength, int numberOfSimpleN_gon)
         {
-            get => BaseLength;
-            set 
+            if (numberOfSides <= 2)
             {
-                if (BaseLength < 0)
+                if (numberOfSides < 0)
                 {
-                    Console.WriteLine("Число меньше нуля");
-                    BaseLength= 0;
+                    Console.WriteLine("Количество сторон не может быть меньше нуля.");
                 }
-                BaseLength = value;
+                else
+                {
+                    Console.WriteLine("Слишком малое количество сторон.");
+                }
+                numberOfSides = 1;
             }
-        }
-        public float AngleBetween 
-        {
-            get => AngleBetween;
-            set
+            if (sideLength < 0.000001f)
             {
-                if (AngleBetween <= 0 || AngleBetween >= 180)
-                {
-                    Console.WriteLine("Число меньше нуля");
-                    AngleBetween = 1;
-                }
-                AngleBetween = value;
+                Console.WriteLine("Слишком маленькая длина стороны.");
+                sideLength = 0.0f;
             }
+            if(numberOfSimpleN_gon < 1)
+            {
+                Console.WriteLine("Количество n-угольников не может быть меньше одного.");
+                numberOfSimpleN_gon = 1;
+            }
+            this.NumberOfSides = numberOfSides;
+            this.SideLength = sideLength;
+            this.NumbersOfSimpleN_gon = numberOfSimpleN_gon;
         }
+        
         public int NumberOfSides
         {
-            get => NumberOfSides;
-            set
-            {
-                if (NumberOfSides < 3)
-                {
-                    Console.WriteLine("Число меньше нуля");
-                    NumberOfSides = 0;
-                }
-                NumberOfSides= value;
-            }
+            get; 
         }
-        public float SideLength 
+        public float SideLength
         {
-            get => SideLength;
-            set
-            {
-                if (SideLength < 0)
-                {
-                    Console.WriteLine("Число меньше нуля");
-                    SideLength = 0;
-                }
-                SideLength= value;
-            }
+            get; 
         }
-        public float Square 
+
+        public float Square()
         {
-            get 
+            if(NumberOfSides < 3 || SideLength == 0.0f)
             {
-                Square = (float)(((NumberOfSides * SideLength * SideLength) / 4) + (1 / Math.Abs(Math.Tan(180 / NumberOfSides))));
-                return Square;
+                return 0;
             }
-            set { }
+            float Tan = (float)Math.Abs(Math.Tan(ConvertToRadians(180/NumberOfSides)));
+
+            float a = NumberOfSides * SideLength * SideLength;
+
+            float squareOfOneFigure = (float)(a/(4*Tan));
+
+            return NumbersOfSimpleN_gon * squareOfOneFigure;
         }
-        public float Perimetr 
+        public float Perimetr()
         {
-            get 
+            if(NumberOfSides < 1)
             {
-                for(int i = 0; i < NumberOfSides; i++)
-                {
-                    Perimetr += (float)SideLength;
-                }
-                return Perimetr;
+                return 0;
             }
-            set { }
+            else if (NumberOfSides < 3 || SideLength == 0.0f)
+            {
+                return SideLength;
+            }
+            float overAllPerimetr = SideLength * NumberOfSides * NumbersOfSimpleN_gon - (NumbersOfSimpleN_gon - 2 + NumbersOfSimpleN_gon) * SideLength;
+
+            return overAllPerimetr;
+           
         }
 
         
